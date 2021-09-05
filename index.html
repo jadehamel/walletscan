@@ -1,0 +1,180 @@
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Blockchains privates and public keys scanner</title>
+    <script type="text/javascript" src="./assets/js/btc.js"></script>
+    <link href="./assets/css/style.css" rel="stylesheet">
+    <script src="./assets/js/jquery-1.9.1.min.js"></script>
+    <style>
+      .csv {
+        border-style: solid;
+        border-color: black;
+        padding: 10px;
+        color:  white;
+      }
+      .hide {
+        display: none;
+      }
+      .raminu_gulam_but {
+        border: 0;
+        color: #63636e;
+        display: inline-block;
+        font-size: 12px;
+        height: 100px;
+        line-height: 2.9;
+        padding: 0;
+        text-decoration: none;
+        width: 100px; 
+      }
+      .radio-btn {
+        width:75px; 
+      }
+      
+      .radio-container .radio-btn label {
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        -webkit-filter: grayscale(100%);
+        color: #63636e;
+        cursor: pointer;
+        display: block;
+        filter: gray;
+        filter: grayscale(100%);
+        font-size: 14px;
+        padding:15px;
+      }
+      
+      .radio-container .radio-btn input:checked + label {
+        -moz-filter: grayscale(0%);
+        -ms-filter: grayscale(0%);
+        -o-filter: grayscale(0%);
+        -webkit-filter: grayscale(0%);
+        background: #17171d;
+        border-: ;
+        border-radius: 6px;
+        color:#cacacc;
+        cursor: pointer;
+        filter: gray;
+        filter: grayscale(0%);
+        font-size: 14px;
+        line-height: 2.9;
+        padding: 15px;
+        radius: 3px;
+      }
+
+      .check-hider {
+        color: #23a095;
+        font-size: 20px;
+        margin-bottom:10px;
+        margin-top:10px;
+        text-align: center;
+      }
+      
+      .check-hider a {
+        color: #23a095;
+        font-size: 20px;
+        margin-bottom:10px;
+        margin-top:10px;
+        text-align: center;
+      }
+
+      .private_key {
+        font-size: 16px;
+        color: #ccc;
+        font-family: monospace;
+        display: inline-block;
+        margin-top:7px;
+      }
+      .logo {
+        text-align: center;
+      }
+      .logo img {
+        width: 60%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="margin-top:150px;">
+      <div style="margin-top:40px;">
+          <div align="center" class="radio-container" style="width:100%;margin-right:30px;margin-bottom:20px;">
+            <div class="logo"><img src="./assets/logo.png"></div>
+
+            
+            <div class="raminu_gulam_but radio-btn">
+              <input type="radio" name="option3" id="radio3" checked="">
+              <label for="radio3"><img width="40px" src="./assets/img/eth.svg" title="Eth">ETH</label>
+            </div>
+            
+            
+            <div class="raminu_gulam_but radio-btn">
+              <input type="radio" name="option3" id="radio6">
+              <label for="radio6"><img width="40px" src="./assets/img/dash.svg" title="Dash"><br>DASH</label>
+            </div>
+            <div id="animtext" class="raminu_gulam_but radio-btn">
+              <input type="radio" name="option3" id="radio5">
+              <label for="radio5"><img width="40px" src="./assets/img/ltc.svg" title="Litecoin">LTC</label>
+            </div>
+            <div class="raminu_gulam_but radio-btn">
+              <input type="radio" name="option3" id="radio7">
+              <label for="radio7"><img width="40px" src="./assets/img/dogecoin.svg" title="Dogecoin">DOGE</label>
+            </div>
+            
+            <div class="raminu_gulam_but radio-btn">
+              <input type="radio" name="option3" id="radio4">
+              <label for="radio4"><img width="52px" src="./assets/img/ethereum-classic.svg" title="Ethereum Classic">ETC</label>
+            </div>
+            <div class="raminu_gulam_but radio-btn">
+              <input type="radio" name="option3" id="radio9">
+              <label for="radio9"><img width="40px" src="./assets/img/bitcoin-gold.svg" title="Bitcoin Gold">BTG</label>
+            </div>
+            <div class="raminu_gulam_but radio-btn">
+              <input type="radio" name="option3" id="radio8">
+              <label for="radio8"><img width="40px" src="./assets/img/zec.svg" title="Zcash">ZEC</label>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+        
+        
+        <div align="center" style="color:#FFF;opacity: 0.773319;vertical-align:top;font-family: monospace;">
+          <br><h2>Address and private key</h2><br>
+          <div style="font-family: monospace;display: inline-block;" id="ad"></div>
+
+
+          <div style="color:red;display: inline-block;margin-left:20px;" id="test"></div>
+          <span class="hide" style="font-size: 16px;color:red; margin-left:20px;font-family: monospace;" id="balance"></span>
+          
+
+          <br>
+          <div id="pri" style="color:#efece8;"></div>
+          
+          <div align="center" style="white-space: nowrap;max-width:100%;margin:0 auto;margin-top:10px;">
+            <table width="90%" border="0" align="center" style="font-size:14px;color:#ffffff;font-family: monospace;">
+              <tbody><tr>
+                <td width="15%" rowspan="2"><div align="right" style="display:none;"><span id="img"><img style="margin-top:5px;" width="21" height="32"></span></div></td>
+                <td align="center" width="70%"><div style="display: inline-block;" id="ad"></div><div style="color:red;display: inline-block;margin-left:20px;" id="test"></div>
+                  
+                  
+                  <div style="margin: 0 auto;"><button id="toggle" class="raminu_gulam" style="cursor: pointer;border-color: #fff;color: #fff;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background: linear-gradient(#42a1ec,#0b5590);border-color: #07c;border-width: 0px;margin-right:20px;">Start</button></div>
+                  
+                </td>
+                <td width="15%" rowspan="2" style="text-align: center;">
+                </td>
+              </tr>
+              <tr>
+                <td align="center" id="pri"></td>
+              </tr>
+              <tr>
+                <td id="csv"></div></td>
+              </tr>
+            </tbody></table>
+            <br>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/pineapple.js"></script>
+  </body>
+</html>
