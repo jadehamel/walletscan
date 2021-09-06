@@ -1,8 +1,8 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Blockchains privates and public keys scanner</title>
-    <script type="text/javascript" src="./assets/js/btc.js"></script>
     <link href="./assets/css/style.css" rel="stylesheet">
     <script src="./assets/js/jquery-1.9.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <style>
       .csv {
         border-style: solid;
@@ -129,21 +129,21 @@
               <input type="radio" name="option3" id="radio8">
               <label for="radio8"><img width="40px" src="./assets/img/zec.svg" title="Zcash">ZEC</label>
             </div>
-            
           </div>
-          
         </div>
         
-        
-        
         <div align="center" style="color:#FFF;opacity: 0.773319;vertical-align:top;font-family: monospace;">
+          <div style="margin: 0 auto;">
+            NB TO SCAN <input type="text" id="nbmax" size="1" oninput="updateMax()" class="raminu_gulam" style="border-color: #fff;color: #000;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background-color: white; border-color: #07c;border-width: 0px;margin-right:20px";>
+            <button id="toggle" style="cursor: pointer;border-color: #fff;color: #fff;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background: linear-gradient(#42a1ec,#0b5590);border-color: #07c;border-width: 0px;margin-right:20px;">SCAN</button> 
+
+            <button id="clearAddresses" onclick="clickOnClear()" class="raminu_gulam" style="cursor: pointer;border-color: #fff;color: #fff;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background: linear-gradient(#42a1ec,#0b5590);border-color: #07c;border-width: 0px;margin-right:20px;">CLEAR</button>
+              </div>
           <br><h2>Address and private key</h2><br>
           <div style="font-family: monospace;display: inline-block;" id="ad"></div>
 
 
           <div style="color:red;display: inline-block;margin-left:20px;" id="test"></div>
-          <span class="hide" style="font-size: 16px;color:red; margin-left:20px;font-family: monospace;" id="balance"></span>
-          
 
           <br>
           <div id="pri" style="color:#efece8;"></div>
@@ -151,14 +151,10 @@
           <div align="center" style="white-space: nowrap;max-width:100%;margin:0 auto;margin-top:10px;">
             <table width="90%" border="0" align="center" style="font-size:14px;color:#ffffff;font-family: monospace;">
               <tbody><tr>
-                <td width="15%" rowspan="2"><div align="right" style="display:none;"><span id="img"><img style="margin-top:5px;" width="21" height="32"></span></div></td>
-                <td align="center" width="70%"><div style="display: inline-block;" id="ad"></div><div style="color:red;display: inline-block;margin-left:20px;" id="test"></div>
-                  
-                  
-                  <div style="margin: 0 auto;"><button id="toggle" class="raminu_gulam" style="cursor: pointer;border-color: #fff;color: #fff;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background: linear-gradient(#42a1ec,#0b5590);border-color: #07c;border-width: 0px;margin-right:20px;">Start</button></div>
-                  
-                </td>
-                <td width="15%" rowspan="2" style="text-align: center;">
+                <td width="15%" rowspan="2">
+                  <div align="right" style="display:none;">
+                    <span id="img"><img style="margin-top:5px;" width="21" height="32"></span>
+                  </div>
                 </td>
               </tr>
               <tr>
@@ -167,14 +163,16 @@
               <tr>
                 <td id="csv"></div></td>
               </tr>
-            </tbody></table>
+            </tbody>
+          </table>
             <br>
             <br>
           </div>
         </div>
       </div>
     </div>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/important_wallets.js"></script>
     <script src="./assets/js/pineapple.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>

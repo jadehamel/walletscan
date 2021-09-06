@@ -11,16 +11,33 @@ var speed_day = 0;
 var nmid=0;
 var address=1;
 var address2=1;
-var balance_check = null;
 var coin = null;
-window.wallets = [];
-window.publics = [];
-window.csv = [];
-window.results = 0;
-window.max_results = 25;
+
+function resetWalletData() {
+  window.wallets = [];
+  window.publics = [];
+  window.csv = [];
+  window.results = 0;
+  window.max_results = 25;
+}
+
+function clearAddresses() {
+  $("#clearAddresses").hide();
+  $('#toggle').text("SCAN");
+  document.getElementById("csv").innerHTML = "";
+}
+
+function clickOnClear() {
+  clearAddresses();
+}
+
+function updateMax() {
+  window.max_results = Number(document.getElementById("nbmax").value);
+  document.getElementById("nbmax").value = window.max_results;
+}
+
 var vkl=0;
-var bitcore = require("bitcore-lib");
-//var CoinKey = require('coinkey.js');
+
 document.getElementById("ad").innerHTML = "If you see this inscription";
 document.getElementById("pri").innerHTML = "Then your browser is not supported";
 
@@ -32,15 +49,15 @@ function showWallet(csvs, wweb, address, num) {
     window.csv.push(csvs);
     var html_to_insert = "<br/>" + wweb;
     document.getElementById('csv').innerHTML += html_to_insert;
+    $("#clearAddresses").show();
   } else {
-    $("#toggle").click().hide();
+    $("#toggle").click();
+    resetWalletData();
   }
 }
 
 function intervalDo() {
-	
 	if (flaghide == 0) {
-		
 		if (document.getElementById('radio3').checked) {
     			var num ="";
     			var possible = "0123456789abcdef";
@@ -52,10 +69,17 @@ function intervalDo() {
     			document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Public: </span>" + address + "</a>";
     			document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private: </span>" + num;
           wallet = { pub: address, prv:  num };
-          index = window.results.toString();
+          index = window.results;
           csvs = (index + ";" + address + ";" + num);
           wweb = (index + ";<a target='_blank' href='https://etherscan.io/address/" + address + "'>" + address + "</a>;" + num);
+          if (_.includes(eth_wallets, address)) {
+            wweb = (index + ";<h1><a target='_blank' href='https://etherscan.io/address/" + address + "'>" + address + "</a><h1>;" + num);
+            $("#toggle").click().hide();
+          }
+
           showWallet(csvs, wweb, address, num);
+          $("#clearAdresses").show();
+          if (index == 0) clickOnClear();
 		}
 		
 		if (document.getElementById('radio4').checked) {
@@ -128,16 +152,12 @@ function intervalDo() {
 			document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Bitcoin Gold address: </span>" + addressDo;
 			document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + privKeyDo;
 		}
-		
-		
-		
 	}
 	n=n+1;
 	var now1 = new Date();
 	vkl=vkl+1;
-	//if ((now1-now)<0 && vkl==0) {
 	if (vkl==1) {
-		$('#toggle').text('Start');
+		$("#toggle").text("SCAN");
 		o = 0;
 		speed_day = 0;
 		clearInterval(timer)
@@ -147,58 +167,19 @@ function intervalDo() {
 	z=z+1;
 };
 
-function balance(balance_check, coin) {
-	
-	if(coin == 'btc'){
-		var x = new XMLHttpRequest();
-		x.open("GET", "https://secretscan.org/btc/" + balance_check, true);
-		x.onload = function (){
-			
-			document.getElementById("test").innerHTML = x.responseText + " Balance";
-		}
-		x.send(null);
-	}
-	
-	if(coin == 'eth'){
-		var x = new XMLHttpRequest();
-		x.open("GET", "https://secretscan.org/eth/" + balance_check, true);
-		x.onload = function (){
-			
-			document.getElementById("test").innerHTML = x.responseText + " Balance";
-		}
-		x.send(null);
-	}
-	
-
-}
-
-/*timer = setInterval(intervalDo, rangeValue );
-	
-	
-	
-	$('#range').change(function(){
-	rangeValue = $(this).val();
-	clearInterval(timer)
-	o = 0;speed_day = 0;
-	timer = setInterval(intervalDo, rangeValue );
-})*/
-
 var flag = 0;
-var test = "test";
 
 timer = setInterval(intervalDo, rangeValue );
 
 $('#toggle').click(function(e){
 	e.preventDefault();
 	if ( flag == 0 ) {
-		$('#toggle').text('Start');
+		$('#toggle').text("SCAN");
 		o = 0;
 		speed_day = 0;
 		clearInterval(timer);
-		
-		balance(balance_check, coin);
 		flag++;
-		} else {
+	} else {
 		$('#toggle').text('Stop');
 		rangeValue = $(this).val();
 		clearInterval(timer);
@@ -208,13 +189,10 @@ $('#toggle').click(function(e){
 	}
 });
 
-
-
 var flaghide =0;
 $('#hidekey').click(function(f){
 	f.preventDefault();
 	if ( flaghide == 0 ) {
-		$('#hidekey').text('Показать');
 		document.getElementById("ad2").innerHTML = "";
 		document.getElementById("pri2").innerHTML = "";
 		document.getElementById("ad").innerHTML = "";
@@ -222,8 +200,15 @@ $('#hidekey').click(function(f){
 		
 		flaghide++;
 		} else {
-		$('#hidekey').text('Скрыть');
 		flaghide = 0;
 	}
+
+
 });
 
+$(document).ready(function() {
+  clearAddresses();
+  resetWalletData();
+  $("#nbmax").val(window.max_results);
+  updateMax();
+});
