@@ -53,6 +53,7 @@ function showWallet(csvs, wweb, address, num) {
   } else {
     $("#toggle").click();
     resetWalletData();
+    updateMax();
   }
 }
 
