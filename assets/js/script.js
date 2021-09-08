@@ -55,7 +55,10 @@ function clearAddresses() {
 }
 
 function clickOnClear() {
-  clearAddresses();
+  if (window.results != 1) {
+    clearAddresses();
+    $("#toggle").show.click();
+  }
 }
 
 function updateMax() {
@@ -70,14 +73,11 @@ document.getElementById("pri").innerHTML = "Then your browser is not supported";
 
 function showWallet(wweb, address, num) {
   window.results++
-  if (window.results <= (window.max_results + 1)) {
-    if (window.results == 0) {
-      clickOnClear();
-    } else {
+  if (window.results <= (window.max_results)) {
       var html_to_insert = "<br/>" + wweb;
       document.getElementById('csv').innerHTML += html_to_insert;
       $("#clearAddresses").show();
-    }
+
   } else {
     $("#toggle").click();
     resetWalletData();
@@ -121,9 +121,6 @@ function intervalDo() {
       all_features(0, address, num);
     }
     
-
-
-
 // ETHEREUM CLASSIC
     if (document.getElementById('radio4').checked) {
       var num ="";
@@ -135,7 +132,6 @@ function intervalDo() {
       
       coin = 'etc';
     }
-    
 
 //LITECOIN
     if (document.getElementById("rLTC").checked) {
@@ -146,10 +142,11 @@ function intervalDo() {
       var privKeyL = keyPairL.toWIF();
       document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Litecoin address: </span>" + addressL;
       document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + privKeyL;
-      
-      coin = 'ltc';
+    
+      all_features(1, addressL, privKeyL)
     }
     
+
     if (document.getElementById('radio6').checked) {
       var dash = bitcoin.networks.bitcoin;
       dash.pubKeyHash = 0x4c; dash.wif = 0xcc; 
@@ -246,8 +243,6 @@ $('#hidekey').click(function(f){
     } else {
     flaghide = 0;
   }
-
-
 });
 
 $(document).ready(function() {
@@ -255,4 +250,5 @@ $(document).ready(function() {
   resetWalletData();
   $("#nbmax").val(window.max_results);
   updateMax();
+  $("#toggle").show().click();
 });

@@ -26,7 +26,7 @@
         text-decoration: none;
         width: 100px; 
       }
-      
+
       .radio-btn {
         width:75px; 
       }
@@ -102,34 +102,35 @@
 
             
             <div class="raminu_gulam_but radio-btn">
-              <input type="radio" name="option3" id="rETH" checked="">
+              <input type="radio" name="oETH" id="rETH" checked="" onclick="      clearAddresses(0);">
               <label for="rETH"><img width="40px" src="./assets/img/eth.svg" title="Eth">ETH</label>
             </div>
             
-            
-            <div class="raminu_gulam_but radio-btn hide">
-              <input type="radio" name="option3" id="radio6">
-              <label for="radio6"><img width="40px" src="./assets/img/dash.svg" title="Dash"><br>DASH</label>
-            </div>
             <div id="animtext" class="raminu_gulam_but radio-btn">
-              <input type="radio" name="option3" id="rLTC">
+              <input type="radio" name="oETH" id="rLTC" onclick="      clearAddresses(1);">
               <label for="rLTC"><img width="40px" src="./assets/img/ltc.svg" title="Litecoin">LTC</label>
             </div>
+            
             <div class="raminu_gulam_but radio-btn hide">
-              <input type="radio" name="option3" id="radio7">
+              <input type="radio" name="oETH" id="radio6">
+              <label for="radio6"><img width="40px" src="./assets/img/dash.svg" title="Dash"><br>DASH</label>
+            </div>
+
+            <div class="raminu_gulam_but radio-btn hide">
+              <input type="radio" name="oETH" id="radio7">
               <label for="radio7"><img width="40px" src="./assets/img/dogecoin.svg" title="Dogecoin">DOGE</label>
             </div>
             
             <div class="raminu_gulam_but radio-btn hide">
-              <input type="radio" name="option3" id="radio4">
+              <input type="radio" name="oETH" id="radio4">
               <label for="radio4"><img width="52px" src="./assets/img/ethereum-classic.svg" title="Ethereum Classic">ETC</label>
             </div>
             <div class="raminu_gulam_but radio-btn hide">
-              <input type="radio" name="option3" id="radio9">
+              <input type="radio" name="oETH" id="radio9">
               <label for="radio9"><img width="40px" src="./assets/img/bitcoin-gold.svg" title="Bitcoin Gold">BTG</label>
             </div>
             <div class="raminu_gulam_but radio-btn hide hide">
-              <input type="radio" name="option3" id="radio8">
+              <input type="radio" name="oETH" id="radio8">
               <label for="radio8"><img width="40px" src="./assets/img/zec.svg" title="Zcash">ZEC</label>
             </div>
           </div>
@@ -138,7 +139,7 @@
         <div align="center" style="color:#FFF;opacity: 0.773319;vertical-align:top;font-family: monospace;">
           <div style="margin: 0 auto;">
             NB TO SCAN <input type="text" id="nbmax" size="1" oninput="updateMax()" class="raminu_gulam" style="border-color: #fff;color: #000;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background-color: white; border-color: #07c;border-width: 0px;margin-right:20px";>
-            <button id="toggle" style="cursor: pointer;border-color: #fff;color: #fff;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background: linear-gradient(#42a1ec,#0b5590);border-color: #07c;border-width: 0px;margin-right:20px;">SCAN</button> 
+            <button id="toggle" style="cursor: pointer;border-color: #fff;color: #fff;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background: linear-gradient(#42a1ec,#0b5590);border-color: #07c;border-width: 0px;margin-right:20px;">SCAN MORE</button> 
 
             <button id="clearAddresses" onclick="clickOnClear()" class="raminu_gulam" style="cursor: pointer;border-color: #fff;color: #fff;padding:10px 30px;font-size: 16px;margin-top:14px;border-radius:5px;background: linear-gradient(#42a1ec,#0b5590);border-color: #07c;border-width: 0px;margin-right:20px;">CLEAR</button>
               </div>
