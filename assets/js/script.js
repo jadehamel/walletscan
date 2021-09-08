@@ -77,6 +77,10 @@ function clickOnClear() {
   }
 }
 
+function putExplorerUrlTop(explorer, address) {
+  document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Public: " + "<a target='_blank' href='" + bc_x_url + address + "'>" + address + "</a>";
+}
+
 function updateMax() {
   window.max_results = Number(document.getElementById("nbmax").value);
   document.getElementById("nbmax").value = window.max_results;
@@ -99,6 +103,7 @@ function showWallet(wweb, address, num) {
 function all_features(blockain_id, address, num) {
   bc = window.blockchains[blockain_id];
   bc_x_url = bc.explorers[0].urls.address;
+  putExplorerUrlTop(bc_x_url, address);
   wweb = compare_best_wallets(bc, address, num);
   showWallet(wweb, address, num)
 }
@@ -120,15 +125,14 @@ function intervalDo() {
 
 // ETHEREUM
     if (document.getElementById("rETH").checked) {
-      var num ="";
+      var private ="";
       var possible = "0123456789abcdef";
       for (var i = 0; i < 64; i++)
-      num += possible.charAt(Math.floor(Math.random() * possible.length));
-      var privBuffer11 = EthJS.Util.toBuffer(EthJS.Util.addHexPrefix(num));
+      private += possible.charAt(Math.floor(Math.random() * possible.length));
+      var privBuffer11 = EthJS.Util.toBuffer(EthJS.Util.addHexPrefix(private));
       var address = EthJS.Util.bufferToHex(EthJS.Util.privateToAddress(privBuffer11));
-      document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Public: </span>" + address + "</a>";
-      document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private: </span>" + num;
-      all_features(0, address, num);
+      all_features(0, address, private);
+      document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private: </span>" + private;
     }
 
 //LITECOIN
