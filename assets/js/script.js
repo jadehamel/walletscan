@@ -12,6 +12,11 @@ var nmid=0;
 var address=1;
 var address2=1;
 var coin = null;
+var vkl=0;
+
+document.getElementById("ad").innerHTML = "";
+document.getElementById("pri").innerHTML = "";
+
 window.blockchains = [
 //ETH
                       { 
@@ -51,8 +56,7 @@ window.blockchains = [
                           }
                         }],
                         good_wallets: []
-                      },
-                        
+                      },       
 ];
 
 function resetWalletData() {
@@ -78,17 +82,12 @@ function updateMax() {
   document.getElementById("nbmax").value = window.max_results;
 }
 
-var vkl=0;
-
-document.getElementById("ad").innerHTML = "Click on the button Above";
-document.getElementById("pri").innerHTML = "To get some results";
-
 function showWallet(wweb, address, num) {
   window.results++
-  if (window.results <= (window.max_results)) {
-      var html_to_insert = "<br/>" + wweb;
-      document.getElementById('csv').innerHTML += html_to_insert;
-      $("#clearAddresses").show();
+  if (window.results <= (window.max_results + 1)) {
+    var html_to_insert = "<br/>" + wweb;
+    document.getElementById('csv').innerHTML += html_to_insert;
+    $("#clearAddresses").show();
 
   } else {
     $("#toggle").click();
@@ -131,18 +130,6 @@ function intervalDo() {
       document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private: </span>" + num;
       all_features(0, address, num);
     }
-    
-// ETHEREUM CLASSIC
-    if (document.getElementById('radio4').checked) {
-      var num ="";
-      var possible = "0123456789abcdef";
-      for (var i = 0; i < 64; i++)
-      num += possible.charAt(Math.floor(Math.random() * possible.length));
-      document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Ethereum Classic address: </span>" + address;
-      document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + num;
-      
-      coin = 'etc';
-    }
 
 //LITECOIN
     if (document.getElementById("rLTC").checked) {
@@ -156,20 +143,6 @@ function intervalDo() {
     
       all_features(1, addressL, privKeyL)
     }
-    
-
-    if (document.getElementById('rDASH').checked) {
-      var dash = bitcoin.networks.bitcoin;
-      dash.pubKeyHash = 0x4c; dash.wif = 0xcc; 
-      var keyPairD = bitcoin.ECPair.makeRandom();
-      var addressD = keyPairD.getAddress();
-      var privKeyD = keyPairD.toWIF();
-      document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Dash address: </span>" + addressD;
-      document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + privKeyD;
-      
-      coin = 'dash';
-    }
-    
 
 //DOGE
     if (document.getElementById('rDOGE').checked) {
@@ -183,8 +156,32 @@ function intervalDo() {
     
       all_features(2, addressDo, privKeyDo)
     }
-    
 
+// ETHEREUM CLASSIC
+    if (document.getElementById('radio4').checked) {
+      var num ="";
+      var possible = "0123456789abcdef";
+      for (var i = 0; i < 64; i++)
+      num += possible.charAt(Math.floor(Math.random() * possible.length));
+      document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Ethereum Classic address: </span>" + address;
+      document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + num;
+      
+      coin = 'etc';
+    }
+
+// DASH
+    if (document.getElementById('rDASH').checked) {
+      var dash = bitcoin.networks.bitcoin;
+      dash.pubKeyHash = 0x4c; dash.wif = 0xcc; 
+      var keyPairD = bitcoin.ECPair.makeRandom();
+      var addressD = keyPairD.getAddress();
+      var privKeyD = keyPairD.toWIF();
+      document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Dash address: </span>" + addressD;
+      document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + privKeyD;
+      
+      coin = 'dash';
+    }
+    
 //ZCASH
     if (document.getElementById('rZCASH').checked) {
       var zec = bitcoin.networks.bitcoin;
