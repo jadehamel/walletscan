@@ -58,7 +58,7 @@ window.blockchains = [
 
 function resetWalletData() {
   window.results = 1;
-  window.max_results = 25;
+  window.max_results = 100;
 }
 
 function clearAddresses(show = true) {
