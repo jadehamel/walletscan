@@ -50,7 +50,7 @@ function resetWalletData() {
 
 function clearAddresses() {
   $("#clearAddresses").hide();
-  $('#toggle').text("SCAN");
+  $("#toggle").text("SCAN");
   document.getElementById("csv").innerHTML = "";
 }
 
@@ -105,10 +105,8 @@ function compare_best_wallets(blockchain, address, num) {
   return wweb;
 }
 
-
 function intervalDo() {
   if (flaghide == 0) {
-
 
 // ETHEREUM
     if (document.getElementById("rETH").checked) {
@@ -217,16 +215,16 @@ var flag = 0;
 
 timer = setInterval(intervalDo, rangeValue );
 
-$('#toggle').click(function(e){
+$("#toggle").click(function(e){
   e.preventDefault();
   if ( flag == 0 ) {
-    $('#toggle').text("SCAN MORE");
+    $("#toggle").text("SCAN MORE");
     o = 0;
     speed_day = 0;
     clearInterval(timer);
     flag++;
   } else {
-    $('#toggle').text('Stop');
+    $("#toggle").text('Stop');
     rangeValue = $(this).val();
     clearInterval(timer);
     timer = setInterval(intervalDo, rangeValue );
