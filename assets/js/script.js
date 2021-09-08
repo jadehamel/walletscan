@@ -9,9 +9,6 @@ var minstart = new Date();
 var o = 0;
 var speed_day = 0;
 var nmid=0;
-var address=1;
-var address2=1;
-var coin = null;
 var vkl=0;
 
 document.getElementById("ad").innerHTML = "";
@@ -64,16 +61,19 @@ function resetWalletData() {
   window.max_results = 25;
 }
 
-function clearAddresses() {
-  $("#clearAddresses").hide();
-  $("#toggle").text("SCAN");
-  document.getElementById("csv").innerHTML = "";
+function clearAddresses(show = true) {
+  $("#toggle").text("SCAN MORE");
+  if (show) {
+    $("#clearAddresses").hide();
+    document.getElementById("csv").innerHTML = "";
+  } else {
+    $("#toggle").show.click();
+  }
 }
 
 function clickOnClear() {
   if (window.results != 1) {
-    clearAddresses();
-    $("#toggle").show.click();
+    clearAddresses(false);
   }
 }
 
@@ -165,8 +165,6 @@ function intervalDo() {
       num += possible.charAt(Math.floor(Math.random() * possible.length));
       document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Ethereum Classic address: </span>" + address;
       document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + num;
-      
-      coin = 'etc';
     }
 
 // DASH
@@ -178,8 +176,6 @@ function intervalDo() {
       var privKeyD = keyPairD.toWIF();
       document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Dash address: </span>" + addressD;
       document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + privKeyD;
-      
-      coin = 'dash';
     }
     
 //ZCASH
@@ -192,8 +188,6 @@ function intervalDo() {
       
       document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Zcash address: </span>";
       document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + privKeyDo;
-      
-      coin = 'zcash';
     }
     
     if (document.getElementById('radio9').checked) {
@@ -250,9 +244,8 @@ $('#hidekey').click(function(f){
     document.getElementById("pri2").innerHTML = "";
     document.getElementById("ad").innerHTML = "";
     document.getElementById("pri").innerHTML = "";
-    
     flaghide++;
-    } else {
+  } else {
     flaghide = 0;
   }
 });
