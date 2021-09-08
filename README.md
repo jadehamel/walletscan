@@ -1,6 +1,6 @@
 # Wallet Scan
 
-- An 100% client side Web app that generate differente random public addresses and corresponding private keys on different blockchains
+A 100% client side Web paper wallet generator for different blockchains
 
 Blockchains supported:
   - Ethereum (ETH)
