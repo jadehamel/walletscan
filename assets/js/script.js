@@ -40,6 +40,18 @@ window.blockchains = [
                         good_wallets: []
                       },
 // DOGE
+                    { 
+
+                        name: "Dogecoin",
+                        symbol: "DOGE",
+                        explorers: [{
+                          name: "Blockchair",
+                          urls: {
+                            address: "https://blockchair.com/dogecoin/address/"
+                          }
+                        }],
+                        good_wallets: []
+                      },
                         
 ];
 
@@ -91,7 +103,6 @@ function all_features(blockain_id, address, num) {
   wweb = compare_best_wallets(bc, address, num);
   showWallet(wweb, address, num)
 }
-
 
 function compare_best_wallets(blockchain, address, num) {
   good_wallets = blockchain.good_wallets;
@@ -147,7 +158,7 @@ function intervalDo() {
     }
     
 
-    if (document.getElementById('radio6').checked) {
+    if (document.getElementById('rDASH').checked) {
       var dash = bitcoin.networks.bitcoin;
       dash.pubKeyHash = 0x4c; dash.wif = 0xcc; 
       var keyPairD = bitcoin.ECPair.makeRandom();
@@ -159,7 +170,9 @@ function intervalDo() {
       coin = 'dash';
     }
     
-    if (document.getElementById('radio7').checked) {
+
+//DOGE
+    if (document.getElementById('rDOGE').checked) {
       var doge = bitcoin.networks.bitcoin;
       doge.pubKeyHash = 0x1e; doge.wif = 0x9e; 
       var keyPairDo = bitcoin.ECPair.makeRandom();
@@ -167,11 +180,13 @@ function intervalDo() {
       var privKeyDo = keyPairDo.toWIF();
       document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Dogecoin address: </span>" + addressDo;
       document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private key: </span>" + privKeyDo;
-      
-      coin = 'doge';
+    
+      all_features(2, addressDo, privKeyDo)
     }
     
-    if (document.getElementById('radio8').checked) {
+
+//ZCASH
+    if (document.getElementById('rZCASH').checked) {
       var zec = bitcoin.networks.bitcoin;
       zec.pubKeyHash = 0x3f; zec.wif = 0x80; 
       var keyPairDo = bitcoin.ECPair.makeRandom();
