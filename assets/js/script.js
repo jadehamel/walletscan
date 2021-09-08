@@ -14,10 +14,7 @@ var address2=1;
 var coin = null;
 
 function resetWalletData() {
-  window.wallets = [];
-  window.publics = [];
-  window.csv = [];
-  window.results = 0;
+  window.results = 1;
   window.max_results = 25;
 }
 
@@ -41,15 +38,16 @@ var vkl=0;
 document.getElementById("ad").innerHTML = "If you see this inscription";
 document.getElementById("pri").innerHTML = "Then your browser is not supported";
 
-function showWallet(csvs, wweb, address, num) {
+function showWallet(wweb, address, num) {
   window.results++
   if (window.results <= (window.max_results + 1)) {
-    window.wallets.push(wallet);
-    window.publics.push(address);
-    window.csv.push(csvs);
-    var html_to_insert = "<br/>" + wweb;
-    document.getElementById('csv').innerHTML += html_to_insert;
-    $("#clearAddresses").show();
+  	if (window.results == 0) {
+  		clickOnClear();
+  	} else {
+	    var html_to_insert = "<br/>" + wweb;
+	    document.getElementById('csv').innerHTML += html_to_insert;
+	    $("#clearAddresses").show();
+  	}
   } else {
     $("#toggle").click();
     resetWalletData();
@@ -59,7 +57,7 @@ function showWallet(csvs, wweb, address, num) {
 
 function intervalDo() {
 	if (flaghide == 0) {
-		if (document.getElementById('radio3').checked) {
+		if (document.getElementById("rETH").checked) {
     			var num ="";
     			var possible = "0123456789abcdef";
     			for (var i = 0; i < 64; i++)
@@ -69,18 +67,16 @@ function intervalDo() {
     			var address = EthJS.Util.bufferToHex(EthJS.Util.privateToAddress(privBuffer11));
     			document.getElementById("ad").innerHTML = "<span style='color:#818e9a;'>Public: </span>" + address + "</a>";
     			document.getElementById("pri").innerHTML = "<span style='color:#818e9a;'>Private: </span>" + num;
-          wallet = { pub: address, prv:  num };
-          index = window.results;
-          csvs = (index + ";" + address + ";" + num);
-          wweb = (index + ";<a target='_blank' href='https://etherscan.io/address/" + address + "'>" + address + "</a>;" + num);
-          if (_.includes(eth_wallets, address)) {
-            wweb = (index + ";<h1><a target='_blank' href='https://etherscan.io/address/" + address + "'>" + address + "</a><h1>;" + num);
+
+          wweb = (window.results + ";<a target='_blank' href='https://etherscan.io/address/" + address + "'>" + address + "</a>;" + num);
+
+          // compare with good wallets addresses
+          if (_.includes(window.eth_wallets, address)) {
+            wweb = (window.results + ";<h1><a target='_blank' href='https://etherscan.io/address/" + address + "'>" + address + "</a><h1>;" + num);
             $("#toggle").click().hide();
           }
 
-          showWallet(csvs, wweb, address, num);
-          $("#clearAdresses").show();
-          if (index == 0) clickOnClear();
+          showWallet(wweb, address, num);
 		}
 		
 		if (document.getElementById('radio4').checked) {
@@ -95,7 +91,7 @@ function intervalDo() {
 		}
 		
 		
-		if (document.getElementById('radio5').checked) {
+		if (document.getElementById("rLTC").checked) {
 			var lite = bitcoin.networks.bitcoin;
 			lite.pubKeyHash = 0x30; lite.wif = 0xb0; 
 			var keyPairL = bitcoin.ECPair.makeRandom();
