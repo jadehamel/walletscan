@@ -68,8 +68,8 @@ function updateMax() {
 
 var vkl=0;
 
-document.getElementById("ad").innerHTML = "If you see this inscription";
-document.getElementById("pri").innerHTML = "Then your browser is not supported";
+document.getElementById("ad").innerHTML = "Click on the button Above";
+document.getElementById("pri").innerHTML = "To get some results";
 
 function showWallet(wweb, address, num) {
   window.results++
