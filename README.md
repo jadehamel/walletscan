@@ -9,6 +9,7 @@ Blockchains supported:
 Features
   (For all supported Blockchains)
   - Choose the number of adresses to generate at once
+  - Every results can be use as paper wallet
   - Clickable public address to the block explorer
   
   (For Ethereum blockchain)
